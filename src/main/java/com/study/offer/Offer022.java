@@ -16,10 +16,26 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 public class Offer022 {
 
     /**
+     *
+     * 输入：head = [3,2,0,-4], pos = 1
+     * 输出：返回索引为 1 的链表节点
+     * 解释：链表中有一个环，其尾部连接到第二个节点。
      * @param head 源链表头结点
      * @return 开始入环的第一个节点
      */
     public ListNode detectCycle(ListNode head) {
-        throw new NotImplementedException();
+        ListNode slow = head, fast = head;
+        while (true) {
+            if (fast == null || fast.next == null) return null;
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) break;
+        }
+        fast = head;
+        while (fast != slow) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return fast;
     }
 }
